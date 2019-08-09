@@ -26,8 +26,8 @@ namespace F12019New
         {
             Author = "ffxf";
             Version = "v0.1";
-            BannerImage = @"img\krp_banner.png"; // Image shown on top of the profiles tab
-            IconImage = @"img\krp.png";          // Icon used in the tree view for the profile
+            BannerImage = @"img\simfeedback.png"; // Image shown on top of the profiles tab
+            IconImage = @"img\codemasters.png";          // Icon used in the tree view for the profile
             TelemetryUpdateFrequency = 60;       // the update frequency in samples per second
         }
 

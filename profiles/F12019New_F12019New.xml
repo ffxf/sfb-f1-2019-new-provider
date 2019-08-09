@@ -1,0 +1,772 @@
+<?xml version="1.0"?>
+<Profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Active="true" Name="F12019New" TelemetryProvider="F12019New" OverallIntensity="50">
+  <Author>ffxf</Author>
+  <Version>v1.0</Version>
+  <Info>Baseline profile F1-2019 New Data Format
+</Info>
+  <BannerImage>img/banner_simfeedback.png</BannerImage>
+  <ControllerConfigList>
+    <ControllerConfig Id="1" Type="SFX" SmoothingEnabled="false" Smoothness="28" Intensity="39" Acceleration="24" MinSpeed="64" MaxSpeed="84" />
+  </ControllerConfigList>
+  <FeedbackEffectList>
+    <FeedbackEffect Type="SimFeedback.motion.PitchMotionFeedbackEffect">
+      <linearInterpolation>true</linearInterpolation>
+      <name>Surge</name>
+      <telemetryName>gForceLongitudinal</telemetryName>
+      <intervalValueY1>5</intervalValueY1>
+      <minValueY1>-25</minValueY1>
+      <maxValueY1>25</maxValueY1>
+      <intervalValueX>2</intervalValueX>
+      <minValueX>-6</minValueX>
+      <maxValueX>6</maxValueX>
+      <enabled>true</enabled>
+      <mute>false</mute>
+      <smoothing>0</smoothing>
+      <controller-id>1</controller-id>
+      <intensity>1</intensity>
+      <ConfigDataSet>
+        <xs:schema id="DataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+          <xs:element name="DataSet" msdata:IsDataSet="true" msdata:Locale="de-DE">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Volume" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Frequency" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Realtime" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:choice>
+            </xs:complexType>
+          </xs:element>
+        </xs:schema>
+        <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+          <DataSet>
+            <Volume diffgr:id="Volume1" msdata:rowOrder="0">
+              <X>-4.756</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume2" msdata:rowOrder="1">
+              <X>-1.442</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume3" msdata:rowOrder="2">
+              <X>5.964</X>
+              <Y>0</Y>
+            </Volume>
+            <Frequency diffgr:id="Frequency1" msdata:rowOrder="0">
+              <X>-4.756</X>
+              <Y>12.547140033752122</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency2" msdata:rowOrder="1">
+              <X>-1.442</X>
+              <Y>1.0905555436957855</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency3" msdata:rowOrder="2">
+              <X>5.964</X>
+              <Y>-4.5045206026107962</Y>
+            </Frequency>
+          </DataSet>
+        </diffgr:diffgram>
+      </ConfigDataSet>
+    </FeedbackEffect>
+    <FeedbackEffect Type="SimFeedback.motion.HeaveMotionFeedbackEffect">
+      <linearInterpolation>false</linearInterpolation>
+      <name>Heave</name>
+      <telemetryName>gForceVertical</telemetryName>
+      <intervalValueY1>10</intervalValueY1>
+      <minValueY1>-40</minValueY1>
+      <maxValueY1>40</maxValueY1>
+      <intervalValueX>0.5</intervalValueX>
+      <minValueX>-3</minValueX>
+      <maxValueX>3</maxValueX>
+      <enabled>true</enabled>
+      <mute>false</mute>
+      <smoothing>3</smoothing>
+      <controller-id>1</controller-id>
+      <intensity>0.8</intensity>
+      <ConfigDataSet>
+        <xs:schema id="DataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+          <xs:element name="DataSet" msdata:IsDataSet="true" msdata:Locale="de-DE">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Volume" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Frequency" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Realtime" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:choice>
+            </xs:complexType>
+          </xs:element>
+        </xs:schema>
+        <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+          <DataSet>
+            <Volume diffgr:id="Volume1" msdata:rowOrder="0">
+              <X>-1.988</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume2" msdata:rowOrder="1">
+              <X>-0.503</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume3" msdata:rowOrder="2">
+              <X>0.515</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume4" msdata:rowOrder="3">
+              <X>2.045</X>
+              <Y>0</Y>
+            </Volume>
+            <Frequency diffgr:id="Frequency1" msdata:rowOrder="0">
+              <X>-1.988</X>
+              <Y>-18.018082410443185</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency2" msdata:rowOrder="1">
+              <X>-0.503</X>
+              <Y>-2.0917347732683993</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency3" msdata:rowOrder="2">
+              <X>0.515</X>
+              <Y>2.597471901731403</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency4" msdata:rowOrder="3">
+              <X>2.045</X>
+              <Y>18.216696441827992</Y>
+            </Frequency>
+          </DataSet>
+        </diffgr:diffgram>
+      </ConfigDataSet>
+    </FeedbackEffect>
+    <FeedbackEffect Type="SimFeedback.motion.PitchMotionFeedbackEffect">
+      <linearInterpolation>true</linearInterpolation>
+      <name>Pitch</name>
+      <telemetryName>pitch</telemetryName>
+      <intervalValueY1>10</intervalValueY1>
+      <minValueY1>-50</minValueY1>
+      <maxValueY1>50</maxValueY1>
+      <intervalValueX>0.05</intervalValueX>
+      <minValueX>-0.15</minValueX>
+      <maxValueX>0.15</maxValueX>
+      <enabled>true</enabled>
+      <mute>false</mute>
+      <smoothing>0</smoothing>
+      <controller-id>1</controller-id>
+      <intensity>1</intensity>
+      <ConfigDataSet>
+        <xs:schema id="DataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+          <xs:element name="DataSet" msdata:IsDataSet="true" msdata:Locale="de-DE">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Volume" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Frequency" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Realtime" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:choice>
+            </xs:complexType>
+          </xs:element>
+        </xs:schema>
+        <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+          <DataSet>
+            <Volume diffgr:id="Volume1" msdata:rowOrder="0">
+              <X>-0.099</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume2" msdata:rowOrder="1">
+              <X>0.1</X>
+              <Y>0</Y>
+            </Volume>
+            <Frequency diffgr:id="Frequency1" msdata:rowOrder="0">
+              <X>-0.099</X>
+              <Y>-20.732057892721095</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency2" msdata:rowOrder="1">
+              <X>0.1</X>
+              <Y>19.765636118640828</Y>
+            </Frequency>
+          </DataSet>
+        </diffgr:diffgram>
+      </ConfigDataSet>
+    </FeedbackEffect>
+    <FeedbackEffect Type="SimFeedback.motion.RollLowpassMotionFeedbackEffect">
+      <linearInterpolation>true</linearInterpolation>
+      <name>Roll</name>
+      <telemetryName>roll</telemetryName>
+      <intervalValueY1>10</intervalValueY1>
+      <minValueY1>-40</minValueY1>
+      <maxValueY1>40</maxValueY1>
+      <intervalValueX>0.05</intervalValueX>
+      <minValueX>-0.15</minValueX>
+      <maxValueX>0.15</maxValueX>
+      <enabled>true</enabled>
+      <mute>false</mute>
+      <smoothing>3</smoothing>
+      <controller-id>1</controller-id>
+      <intensity>1</intensity>
+      <ConfigDataSet>
+        <xs:schema id="DataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+          <xs:element name="DataSet" msdata:IsDataSet="true" msdata:Locale="de-DE">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Volume" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Frequency" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Realtime" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:choice>
+            </xs:complexType>
+          </xs:element>
+        </xs:schema>
+        <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+          <DataSet>
+            <Volume diffgr:id="Volume1" msdata:rowOrder="0">
+              <X>-0.15</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume2" msdata:rowOrder="1">
+              <X>0.15</X>
+              <Y>0</Y>
+            </Volume>
+            <Frequency diffgr:id="Frequency1" msdata:rowOrder="0">
+              <X>-0.15</X>
+              <Y>22.633173149457825</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency2" msdata:rowOrder="1">
+              <X>0.15</X>
+              <Y>-22.127436020994832</Y>
+            </Frequency>
+          </DataSet>
+        </diffgr:diffgram>
+      </ConfigDataSet>
+      <beta>0</beta>
+    </FeedbackEffect>
+    <FeedbackEffect Type="SimFeedback.motion.RollMotionFeedbackEffect">
+      <linearInterpolation>true</linearInterpolation>
+      <name>Sway</name>
+      <telemetryName>gForceLateral</telemetryName>
+      <intervalValueY1>10</intervalValueY1>
+      <minValueY1>-40</minValueY1>
+      <maxValueY1>40</maxValueY1>
+      <intervalValueX>1</intervalValueX>
+      <minValueX>-6</minValueX>
+      <maxValueX>6</maxValueX>
+      <enabled>true</enabled>
+      <mute>false</mute>
+      <smoothing>2</smoothing>
+      <controller-id>1</controller-id>
+      <intensity>0.8</intensity>
+      <ConfigDataSet>
+        <xs:schema id="DataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+          <xs:element name="DataSet" msdata:IsDataSet="true" msdata:Locale="de-DE">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Volume" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Frequency" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Realtime" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:choice>
+            </xs:complexType>
+          </xs:element>
+        </xs:schema>
+        <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+          <DataSet>
+            <Volume diffgr:id="Volume1" msdata:rowOrder="0">
+              <X>-5.028</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume2" msdata:rowOrder="1">
+              <X>5.028</X>
+              <Y>0</Y>
+            </Volume>
+            <Frequency diffgr:id="Frequency1" msdata:rowOrder="0">
+              <X>-5.028</X>
+              <Y>-13.601605702813373</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency2" msdata:rowOrder="1">
+              <X>5.028</X>
+              <Y>13.254759799458221</Y>
+            </Frequency>
+          </DataSet>
+        </diffgr:diffgram>
+      </ConfigDataSet>
+    </FeedbackEffect>
+    <FeedbackEffect Type="SimFeedback.motion.rumble.AllRumbleEffect">
+      <linearInterpolation>true</linearInterpolation>
+      <name>Rumble Actuator</name>
+      <telemetryName>gForceVertical</telemetryName>
+      <minValueY1>0</minValueY1>
+      <maxValueY1>50</maxValueY1>
+      <intervalValueY1>10</intervalValueY1>
+      <minValueX>-2</minValueX>
+      <maxValueX>2</maxValueX>
+      <intervalValueX>1</intervalValueX>
+      <enabled>true</enabled>
+      <mute>false</mute>
+      <smoothing>0</smoothing>
+      <controller-id>1</controller-id>
+      <intensity>1</intensity>
+      <ConfigDataSet>
+        <xs:schema id="DataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+          <xs:element name="DataSet" msdata:IsDataSet="true" msdata:Locale="de-DE">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Volume" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Frequency" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Realtime" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:choice>
+            </xs:complexType>
+          </xs:element>
+        </xs:schema>
+        <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+          <DataSet>
+            <Volume diffgr:id="Volume1" msdata:rowOrder="0">
+              <X>-1.988</X>
+              <Y>0.81488652806140316</Y>
+            </Volume>
+            <Volume diffgr:id="Volume2" msdata:rowOrder="1">
+              <X>-1.013</X>
+              <Y>0.72962822487958867</Y>
+            </Volume>
+            <Volume diffgr:id="Volume3" msdata:rowOrder="2">
+              <X>-0.21</X>
+              <Y>0.48983924718073518</Y>
+            </Volume>
+            <Volume diffgr:id="Volume4" msdata:rowOrder="3">
+              <X>-0.012</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume5" msdata:rowOrder="4">
+              <X>0.172</X>
+              <Y>0.48451060323187178</Y>
+            </Volume>
+            <Volume diffgr:id="Volume6" msdata:rowOrder="5">
+              <X>0.99</X>
+              <Y>0.75094280067504238</Y>
+            </Volume>
+            <Volume diffgr:id="Volume7" msdata:rowOrder="6">
+              <X>2</X>
+              <Y>0.80955788411253982</Y>
+            </Volume>
+            <Frequency diffgr:id="Frequency1" msdata:rowOrder="0">
+              <X>-1.988</X>
+              <Y>0</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency2" msdata:rowOrder="1">
+              <X>-1.013</X>
+              <Y>43.142216180058696</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency3" msdata:rowOrder="2">
+              <X>-0.21</X>
+              <Y>31.152767295116025</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency4" msdata:rowOrder="3">
+              <X>-0.012</X>
+              <Y>0</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency5" msdata:rowOrder="4">
+              <X>0.172</X>
+              <Y>31.152767295116025</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency6" msdata:rowOrder="5">
+              <X>0.99</X>
+              <Y>43.675080574945035</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency7" msdata:rowOrder="6">
+              <X>2</X>
+              <Y>1.0459289840377526</Y>
+            </Frequency>
+          </DataSet>
+        </diffgr:diffgram>
+      </ConfigDataSet>
+    </FeedbackEffect>
+    <FeedbackEffect Type="SimFeedback.motion.TractionLossMotionFeedbackEffect">
+      <linearInterpolation>false</linearInterpolation>
+      <name>Traction Loss</name>
+      <telemetryName>TractionLoss</telemetryName>
+      <intervalValueY1>10</intervalValueY1>
+      <minValueY1>-20</minValueY1>
+      <maxValueY1>20</maxValueY1>
+      <intervalValueX>2</intervalValueX>
+      <minValueX>-8</minValueX>
+      <maxValueX>8</maxValueX>
+      <enabled>true</enabled>
+      <mute>false</mute>
+      <smoothing>5</smoothing>
+      <controller-id>1</controller-id>
+      <intensity>0.7</intensity>
+      <ConfigDataSet>
+        <xs:schema id="DataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+          <xs:element name="DataSet" msdata:IsDataSet="true" msdata:Locale="de-DE">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Volume" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Frequency" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Realtime" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:choice>
+            </xs:complexType>
+          </xs:element>
+        </xs:schema>
+        <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+          <DataSet>
+            <Volume diffgr:id="Volume1" msdata:rowOrder="0">
+              <X>-4.989</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume2" msdata:rowOrder="1">
+              <X>-2.869</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume3" msdata:rowOrder="2">
+              <X>-0.967</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume4" msdata:rowOrder="3">
+              <X>0.967</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume5" msdata:rowOrder="4">
+              <X>2.807</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume6" msdata:rowOrder="5">
+              <X>5.333</X>
+              <Y>0</Y>
+            </Volume>
+            <Frequency diffgr:id="Frequency1" msdata:rowOrder="0">
+              <X>-4.989</X>
+              <Y>9.3982747531380859</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency2" msdata:rowOrder="1">
+              <X>-2.869</X>
+              <Y>2.3644647406383861</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency3" msdata:rowOrder="2">
+              <X>-0.967</X>
+              <Y>0.23300716109302044</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency4" msdata:rowOrder="3">
+              <X>0.967</X>
+              <Y>-0.4064301127705896</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency5" msdata:rowOrder="4">
+              <X>2.807</X>
+              <Y>-2.1115961764068807</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency6" msdata:rowOrder="5">
+              <X>5.333</X>
+              <Y>-9.3585519468611178</Y>
+            </Frequency>
+          </DataSet>
+        </diffgr:diffgram>
+      </ConfigDataSet>
+    </FeedbackEffect>
+    <FeedbackEffect Type="SimFeedback.motion.rumble.AllRumbleEffect">
+      <linearInterpolation>false</linearInterpolation>
+      <name>Rumble Right</name>
+      <telemetryName>BumpRight</telemetryName>
+      <minValueY1>0</minValueY1>
+      <maxValueY1>50</maxValueY1>
+      <intervalValueY1>10</intervalValueY1>
+      <minValueX>-10</minValueX>
+      <maxValueX>10</maxValueX>
+      <intervalValueX>2</intervalValueX>
+      <enabled>false</enabled>
+      <mute>false</mute>
+      <smoothing>2</smoothing>
+      <controller-id>1</controller-id>
+      <intensity>0.7</intensity>
+      <ConfigDataSet>
+        <xs:schema id="DataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+          <xs:element name="DataSet" msdata:IsDataSet="true" msdata:Locale="de-DE">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Volume" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Frequency" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Realtime" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:choice>
+            </xs:complexType>
+          </xs:element>
+        </xs:schema>
+        <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+          <DataSet>
+            <Volume diffgr:id="Volume1" msdata:rowOrder="0">
+              <X>0.039</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume2" msdata:rowOrder="1">
+              <X>1.169</X>
+              <Y>0.44188145164096443</Y>
+            </Volume>
+            <Volume diffgr:id="Volume3" msdata:rowOrder="2">
+              <X>5.145</X>
+              <Y>0.55378297456709613</Y>
+            </Volume>
+            <Volume diffgr:id="Volume4" msdata:rowOrder="3">
+              <X>8.888</X>
+              <Y>0</Y>
+            </Volume>
+            <Frequency diffgr:id="Frequency1" msdata:rowOrder="0">
+              <X>0.039</X>
+              <Y>0.5130645891514144</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency2" msdata:rowOrder="1">
+              <X>1.169</X>
+              <Y>32.751360479775052</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency3" msdata:rowOrder="2">
+              <X>5.145</X>
+              <Y>35.948546849093091</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency4" msdata:rowOrder="3">
+              <X>8.888</X>
+              <Y>1.5787933789240907</Y>
+            </Frequency>
+          </DataSet>
+        </diffgr:diffgram>
+      </ConfigDataSet>
+    </FeedbackEffect>
+    <FeedbackEffect Type="SimFeedback.motion.rumble.AllRumbleEffect">
+      <linearInterpolation>false</linearInterpolation>
+      <name>Rumble Left</name>
+      <telemetryName>BumpLeft</telemetryName>
+      <minValueY1>0</minValueY1>
+      <maxValueY1>50</maxValueY1>
+      <intervalValueY1>10</intervalValueY1>
+      <minValueX>-10</minValueX>
+      <maxValueX>10</maxValueX>
+      <intervalValueX>2</intervalValueX>
+      <enabled>false</enabled>
+      <mute>false</mute>
+      <smoothing>2</smoothing>
+      <controller-id>1</controller-id>
+      <intensity>2</intensity>
+      <ConfigDataSet>
+        <xs:schema id="DataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+          <xs:element name="DataSet" msdata:IsDataSet="true" msdata:Locale="de-DE">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Volume" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Frequency" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Realtime" msdata:Locale="de-DE">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="X" type="xs:double" minOccurs="0" />
+                      <xs:element name="Y" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:choice>
+            </xs:complexType>
+          </xs:element>
+        </xs:schema>
+        <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+          <DataSet>
+            <Volume diffgr:id="Volume1" msdata:rowOrder="0">
+              <X>-8.926</X>
+              <Y>0</Y>
+            </Volume>
+            <Volume diffgr:id="Volume2" msdata:rowOrder="1">
+              <X>-5.496</X>
+              <Y>0.51648246692505217</Y>
+            </Volume>
+            <Volume diffgr:id="Volume3" msdata:rowOrder="2">
+              <X>-0.975</X>
+              <Y>0.46852467138528159</Y>
+            </Volume>
+            <Volume diffgr:id="Volume4" msdata:rowOrder="3">
+              <X>-0.039</X>
+              <Y>0</Y>
+            </Volume>
+            <Frequency diffgr:id="Frequency1" msdata:rowOrder="0">
+              <X>-8.926</X>
+              <Y>0</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency2" msdata:rowOrder="1">
+              <X>-5.496</X>
+              <Y>35.682114651649925</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency3" msdata:rowOrder="2">
+              <X>-0.975</X>
+              <Y>31.152767295116025</Y>
+            </Frequency>
+            <Frequency diffgr:id="Frequency4" msdata:rowOrder="3">
+              <X>-0.039</X>
+              <Y>0</Y>
+            </Frequency>
+          </DataSet>
+        </diffgr:diffgram>
+      </ConfigDataSet>
+    </FeedbackEffect>
+  </FeedbackEffectList>
+</Profile>>
