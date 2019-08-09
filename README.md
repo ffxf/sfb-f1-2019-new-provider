@@ -1,7 +1,7 @@
 # sfb-f1-2019-new-provider
 SimfeedBack provider for F1 2019 (and F1 2018) new UDP format
 
-See (releases)[https://github.com/ffxf/sfb-f1-2019-new-provider/releases] for installable files.
+See [releases](https://github.com/ffxf/sfb-f1-2019-new-provider/releases) for installable files.
 
 The current version assumes the standard UDP port 20777 of F1-2018 and F1-2019.
 
