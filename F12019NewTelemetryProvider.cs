@@ -13,6 +13,7 @@ namespace F12019New
         public static UInt16 lastRPMs = 0;
         public static int bytesInMotionPacket2019 = 1343;       // Valid for F1-2019; -2 for 2018
         public static int bytesInTelemetryPacket2019 = 1347;    // Valid for F1-2019; -2 for 2018
+        public static int bytesInTelemetryPacket2018 = 1085;    // Valid for F1-2018
 
         private bool isStopped = true;                  // flag to control the polling thread
         private Thread t;                               // the polling thread, reads telemetry data and sends TelemetryUpdated events
@@ -100,12 +101,17 @@ namespace F12019New
 
                     
                     Byte[] received = socket.Receive(ref _senderIP);
+                    LogDebug($"Packet size: '{received.Length}'");
 
-                    if (received.Length == bytesInTelemetryPacket2019 || received.Length == bytesInTelemetryPacket2019-2)
+                    if (received.Length == bytesInTelemetryPacket2019 || received.Length == bytesInTelemetryPacket2018)
                     {
                         var telemData = new PacketCarTelemetryData(received);
-                        lastRPMs = telemData.m_carTelemetryData[0].m_engineRPM;
-                    } else if (received.Length == bytesInMotionPacket2019 || received.Length == bytesInMotionPacket2019-2)
+                        if (received.Length == bytesInTelemetryPacket2019)
+                            lastRPMs = telemData.m_carTelemetryData2019[0].m_engineRPM;
+                        else
+                            lastRPMs = telemData.m_carTelemetryData2018[0].m_engineRPM;
+                    }
+                    else if (received.Length == bytesInMotionPacket2019 || received.Length == bytesInMotionPacket2019-2)
                     {
                         packData = new PacketMotionData(received);
                         

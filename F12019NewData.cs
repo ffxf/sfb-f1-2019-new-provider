@@ -152,7 +152,7 @@ namespace F12019New
         }
     }
 
-    class CarTelemetryData
+    class CarTelemetryData2019
     {
         public int sz { get; set; }
 
@@ -172,7 +172,7 @@ namespace F12019New
         public float[] m_tyresPressure { get; set; }            // Tyres pressure (PSI)
         public byte[] m_surfaceType { get; set; }               // Driving surface, see appendices
 
-        public CarTelemetryData(byte[] rawData, int idx)
+        public CarTelemetryData2019(byte[] rawData, int idx)
         {
             int start_idx = idx;
 
@@ -188,14 +188,14 @@ namespace F12019New
             this.m_brakesTemperature = Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
             this.m_tyresSurfaceTemperature = Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
             this.m_tyresInnerTemperature = Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
+            this.m_engineTemperature = BitConverter.ToUInt16(rawData, idx); idx += sizeof(UInt16);
             this.m_tyresPressure = Conv4Array<float>(rawData, idx); idx += 4 * sizeof(float);
             this.m_surfaceType = Conv4Array<byte>(rawData, idx); idx += 4 * sizeof(byte);
-            this.m_engineTemperature = BitConverter.ToUInt16(rawData, idx); idx += sizeof(UInt16);
 
             this.sz = idx - start_idx;
         }
 
-        public dynamic ConvVal<T>(byte[] rawData, int idx, out int len)
+        public static dynamic ConvVal<T>(byte[] rawData, int idx, out int len)
         {
             if (typeof(T) == typeof(float))
             {
@@ -214,7 +214,7 @@ namespace F12019New
             }
         }
 
-        public T[] Conv4Array<T>(byte[] rawData, int idx)
+        public static T[] Conv4Array<T>(byte[] rawData, int idx)
         {
             int len = 0;
 
@@ -222,26 +222,79 @@ namespace F12019New
 
             for (int i = 0; i < 4; i++)
             {
-                a[i] = ConvVal<T>(rawData, i * len + idx, out len);
+                a[i] = (T) ConvVal<T>(rawData, i * len + idx, out len);
             }
             return a;
+        }
+    }
+
+    class CarTelemetryData2018
+    {
+        public int sz { get; set; }
+
+        public UInt16 m_speed;                                  // Speed of car in kilometres per hour
+        public byte m_throttle;                                // Amount of throttle applied (0.0 to 1.0)
+        public sbyte m_steer;                                   // Steering (-1.0 (full lock left) to 1.0 (full lock right))
+        public byte m_brake;                                   // Amount of brake applied (0.0 to 1.0)
+        public byte m_clutch;                                   // Amount of clutch applied (0 to 100)
+        public sbyte m_gear;                                    // Gear selected (1-8, N=0, R=-1)
+        public UInt16 m_engineRPM;                              // Engine RPM
+        public byte m_drs;                                      // 0 = off, 1 = on
+        public byte m_revLightsPercent;                         // Rev lights indicator (percentage)
+        public UInt16[] m_brakesTemperature { get; set; }       // Brakes temperature (celsius)
+        public UInt16[] m_tyresSurfaceTemperature { get; set; } // Tyres surface temperature (celsius)
+        public UInt16[] m_tyresInnerTemperature { get; set; }   // Tyres inner temperature (celsius)
+        public UInt16 m_engineTemperature { get; set; }         // Engine temperature (celsius)
+        public float[] m_tyresPressure { get; set; }            // Tyres pressure (PSI)
+
+        public CarTelemetryData2018(byte[] rawData, int idx)
+        {
+            int start_idx = idx;
+
+            this.m_speed = BitConverter.ToUInt16(rawData, idx); idx += sizeof(UInt16);
+            this.m_throttle = rawData[idx]; idx += 1;
+            this.m_steer = (sbyte)rawData[idx]; idx += 1;
+            this.m_brake = rawData[idx]; idx += 1;
+            this.m_clutch = rawData[idx]; idx += 1;
+            this.m_gear = (sbyte)rawData[idx]; idx += 1;
+            this.m_engineRPM = BitConverter.ToUInt16(rawData, idx); idx += sizeof(UInt16);
+            this.m_drs = rawData[idx]; idx += 1;
+            this.m_revLightsPercent = rawData[idx]; idx += 1;
+            this.m_brakesTemperature = CarTelemetryData2019.Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
+            this.m_tyresSurfaceTemperature = CarTelemetryData2019.Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
+            this.m_tyresInnerTemperature = CarTelemetryData2019.Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
+            this.m_engineTemperature = BitConverter.ToUInt16(rawData, idx); idx += sizeof(UInt16);
+            this.m_tyresPressure = CarTelemetryData2019.Conv4Array<float>(rawData, idx); idx += 4 * sizeof(float);
+
+            this.sz = idx - start_idx;
         }
     }
 
     class PacketCarTelemetryData
     {
         public PacketHeader m_header;                              // Header
-        public CarTelemetryData[] m_carTelemetryData { get; set; } // Data for all cars on track
+        public CarTelemetryData2018[] m_carTelemetryData2018 { get; set; } // Data for all cars on track
+        public CarTelemetryData2019[] m_carTelemetryData2019 { get; set; } // Data for all cars on track
         public UInt32 m_buttonStatus { get; set; }          // Bit flags specifying which buttons are being pressed
                                                             // currently - see appendices
         public PacketCarTelemetryData(byte[] rawData)
         {
             int idx = 0;
             this.m_header = new PacketHeader(rawData, idx); idx += this.m_header.sz;
-            this.m_carTelemetryData = new CarTelemetryData[20];
-            for (int i = 0; i < 20; i++)
+            if (rawData.Length == F12019NewTelemetryProvider.bytesInTelemetryPacket2018)
             {
-                this.m_carTelemetryData[i] = new CarTelemetryData(rawData, idx); idx += this.m_carTelemetryData[i].sz;
+                this.m_carTelemetryData2018 = new CarTelemetryData2018[20];
+                for (int i = 0; i < 20; i++)
+                {
+                    this.m_carTelemetryData2018[i] = new CarTelemetryData2018(rawData, idx); idx += this.m_carTelemetryData2018[i].sz;
+                }
+            } else
+            {
+                this.m_carTelemetryData2019 = new CarTelemetryData2019[20];
+                for (int i = 0; i < 20; i++)
+                {
+                    this.m_carTelemetryData2019[i] = new CarTelemetryData2019(rawData, idx); idx += this.m_carTelemetryData2019[i].sz;
+                }
             }
         }
     }
