@@ -10,9 +10,9 @@ namespace F12019New
 {
     public class F12019NewTelemetryProvider : AbstractTelemetryProvider
     {
-        public static UInt16 lastRPMs = 0;
-        public static int bytesInMotionPacket2019 = 1343;       // Valid for F1-2019; -2 for 2018
-        public static int bytesInTelemetryPacket2019 = 1347;    // Valid for F1-2019; -2 for 2018
+        public static UInt16 lastRPMs = 0;                      // Contains last RPM value from car telemetry package
+        public static int bytesInMotionPacket2019 = 1343;       // Valid for F1-2019; -2 (=1341) for 2018
+        public static int bytesInTelemetryPacket2019 = 1347;    // Valid for F1-2019
         public static int bytesInTelemetryPacket2018 = 1085;    // Valid for F1-2018
 
         private bool isStopped = true;                  // flag to control the polling thread
@@ -66,8 +66,8 @@ namespace F12019New
 
         private void Run()
         {
-            F12019NewTelemetryData data;
-            PacketMotionData packData;
+            F12019NewTelemetryData data;    // Exposes only data for interest to SimFeedback
+            PacketMotionData packData;      // Raw data as received from game
 
             Session session = new Session();
             Stopwatch sw = new Stopwatch();
@@ -105,6 +105,8 @@ namespace F12019New
 
                     if (received.Length == bytesInTelemetryPacket2019 || received.Length == bytesInTelemetryPacket2018)
                     {
+                        // Unfortunately we need to "digest" the car telemetry data just to the RPMs out of it.
+                        // Storing the RPMs in class variable for easier access when adding it to our SFB exposed telemetry data
                         var telemData = new PacketCarTelemetryData(received);
                         if (received.Length == bytesInTelemetryPacket2019)
                             lastRPMs = telemData.m_carTelemetryData2019[0].m_engineRPM;
@@ -135,8 +137,6 @@ namespace F12019New
                     
                     sw.Restart();
                     //Thread.Sleep(SamplePeriod);
-
-
                 }
                 catch (Exception e)
                 {

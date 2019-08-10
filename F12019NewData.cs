@@ -124,11 +124,11 @@ namespace F12019New
             {
                 this.m_carMotionData[i] = new CarMotionData(rawData, idx); idx += this.m_carMotionData[i].sz;
             }
-            this.m_suspensionPosition = Conv4xFloatArray(rawData, idx); idx += 4 * sizeof(float);
-            this.m_suspensionVelocity = Conv4xFloatArray(rawData, idx); idx += 4 * sizeof(float);
-            this.m_suspensionAcceleration = Conv4xFloatArray(rawData, idx); idx += 4 * sizeof(float);
-            this.m_wheelSpeed = Conv4xFloatArray(rawData, idx); idx += 4 * sizeof(float);
-            this.m_wheelSlip = Conv4xFloatArray(rawData, idx); idx += 4 * sizeof(float);
+            this.m_suspensionPosition = ArrayConverter.Conv4Array<float>(rawData, idx); idx += 4 * sizeof(float);
+            this.m_suspensionVelocity = ArrayConverter.Conv4Array<float>(rawData, idx); idx += 4 * sizeof(float);
+            this.m_suspensionAcceleration = ArrayConverter.Conv4Array<float>(rawData, idx); idx += 4 * sizeof(float);
+            this.m_wheelSpeed = ArrayConverter.Conv4Array<float>(rawData, idx); idx += 4 * sizeof(float);
+            this.m_wheelSlip = ArrayConverter.Conv4Array<float>(rawData, idx); idx += 4 * sizeof(float);
             this.m_localVelocityX = BitConverter.ToInt32(rawData, idx); idx += sizeof(float);
             this.m_localVelocityY = BitConverter.ToInt32(rawData, idx); idx += sizeof(float);
             this.m_localVelocityZ = BitConverter.ToInt32(rawData, idx); idx += sizeof(float);
@@ -139,16 +139,6 @@ namespace F12019New
             this.m_angularAccelerationY = BitConverter.ToInt32(rawData, idx); idx += sizeof(float);
             this.m_angularAccelerationZ = BitConverter.ToInt32(rawData, idx); idx += sizeof(float);
             this.m_frontWheelsAngle = BitConverter.ToInt32(rawData, idx); idx += sizeof(float);
-        }
-
-        private float[] Conv4xFloatArray(byte[] rawData, int idx)
-        {
-            float[] a = new float[4];
-            for (int i = 0; i < 4; i++)
-            {
-                a[i] = BitConverter.ToSingle(rawData, i * sizeof(float) + idx);
-            }
-            return a;
         }
     }
 
@@ -185,46 +175,14 @@ namespace F12019New
             this.m_engineRPM = BitConverter.ToUInt16(rawData, idx); idx += sizeof(UInt16);
             this.m_drs = rawData[idx]; idx += 1;
             this.m_revLightsPercent = rawData[idx]; idx += 1;
-            this.m_brakesTemperature = Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
-            this.m_tyresSurfaceTemperature = Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
-            this.m_tyresInnerTemperature = Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
+            this.m_brakesTemperature = ArrayConverter.Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
+            this.m_tyresSurfaceTemperature = ArrayConverter.Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
+            this.m_tyresInnerTemperature = ArrayConverter.Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
             this.m_engineTemperature = BitConverter.ToUInt16(rawData, idx); idx += sizeof(UInt16);
-            this.m_tyresPressure = Conv4Array<float>(rawData, idx); idx += 4 * sizeof(float);
-            this.m_surfaceType = Conv4Array<byte>(rawData, idx); idx += 4 * sizeof(byte);
+            this.m_tyresPressure = ArrayConverter.Conv4Array<float>(rawData, idx); idx += 4 * sizeof(float);
+            this.m_surfaceType = ArrayConverter.Conv4Array<byte>(rawData, idx); idx += 4 * sizeof(byte);
 
             this.sz = idx - start_idx;
-        }
-
-        public static dynamic ConvVal<T>(byte[] rawData, int idx, out int len)
-        {
-            if (typeof(T) == typeof(float))
-            {
-                len = 4;
-                return BitConverter.ToSingle(rawData, idx);
-            }
-            else if (typeof(T) == typeof(UInt16))
-            {
-                len = 2;
-                return BitConverter.ToUInt16(rawData, idx);
-            }
-            else
-            {
-                len = 1;
-                return rawData[idx];
-            }
-        }
-
-        public static T[] Conv4Array<T>(byte[] rawData, int idx)
-        {
-            int len = 0;
-
-            T[] a = new T[4];
-
-            for (int i = 0; i < 4; i++)
-            {
-                a[i] = (T) ConvVal<T>(rawData, i * len + idx, out len);
-            }
-            return a;
         }
     }
 
@@ -260,11 +218,11 @@ namespace F12019New
             this.m_engineRPM = BitConverter.ToUInt16(rawData, idx); idx += sizeof(UInt16);
             this.m_drs = rawData[idx]; idx += 1;
             this.m_revLightsPercent = rawData[idx]; idx += 1;
-            this.m_brakesTemperature = CarTelemetryData2019.Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
-            this.m_tyresSurfaceTemperature = CarTelemetryData2019.Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
-            this.m_tyresInnerTemperature = CarTelemetryData2019.Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
+            this.m_brakesTemperature = ArrayConverter.Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
+            this.m_tyresSurfaceTemperature = ArrayConverter.Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
+            this.m_tyresInnerTemperature = ArrayConverter.Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
             this.m_engineTemperature = BitConverter.ToUInt16(rawData, idx); idx += sizeof(UInt16);
-            this.m_tyresPressure = CarTelemetryData2019.Conv4Array<float>(rawData, idx); idx += 4 * sizeof(float);
+            this.m_tyresPressure = ArrayConverter.Conv4Array<float>(rawData, idx); idx += 4 * sizeof(float);
 
             this.sz = idx - start_idx;
         }
@@ -370,6 +328,41 @@ namespace F12019New
             this.angularAccelerationZ = data.m_angularAccelerationZ;
             this.frontWheelsAngle = data.m_frontWheelsAngle;
             this.RPMs = F12019NewTelemetryProvider.lastRPMs;
+        }
+    }
+
+    class ArrayConverter
+    {
+        public static dynamic ConvVal<T>(byte[] rawData, int idx, out int len)
+        {
+            if (typeof(T) == typeof(float))
+            {
+                len = 4;
+                return BitConverter.ToSingle(rawData, idx);
+            }
+            else if (typeof(T) == typeof(UInt16))
+            {
+                len = 2;
+                return BitConverter.ToUInt16(rawData, idx);
+            }
+            else
+            {
+                len = 1;
+                return rawData[idx];
+            }
+        }
+
+        public static T[] Conv4Array<T>(byte[] rawData, int idx)
+        {
+            int len = 0;
+
+            T[] a = new T[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                a[i] = (T)ConvVal<T>(rawData, i * len + idx, out len);
+            }
+            return a;
         }
     }
 }
