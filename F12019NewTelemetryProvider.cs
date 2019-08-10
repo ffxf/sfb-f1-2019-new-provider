@@ -8,14 +8,12 @@ using System.Threading;
 
 namespace F12019New
 {
-    class Globals
-    {
-        public static string f1_2019_dll_name = "F12019NewTelemetryProvider";
-        public static bool is_f1_2019 = true;
-    }
-
     public class F12019NewTelemetryProvider : AbstractTelemetryProvider
     {
+        public static UInt16 lastRPMs = 0;
+        public static int bytesInMotionPacket2019 = 1343;       // Valid for F1-2019; -2 for 2018
+        public static int bytesInTelemetryPacket2019 = 1347;    // Valid for F1-2019; -2 for 2018
+
         private bool isStopped = true;                  // flag to control the polling thread
         private Thread t;                               // the polling thread, reads telemetry data and sends TelemetryUpdated events
         private const int PORTNUM = 20777;              // Server Port
@@ -70,16 +68,6 @@ namespace F12019New
             F12019NewTelemetryData data;
             PacketMotionData packData;
 
-            int bytesInMotionPacket = 1343; // Valid for F1-2019
-            LogDebug($"Provider Assembly Name: '{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}'");
-            if (System.Reflection.Assembly.GetExecutingAssembly().GetName().Name != Globals.f1_2019_dll_name)
-            {
-                LogDebug("Running as F1-2018 Telemetry Provider");
-                bytesInMotionPacket = 1341;
-                Globals.is_f1_2019 = false;
-            } else
-                LogDebug("Running as F1-2019 Telemetry Provider");
-
             Session session = new Session();
             Stopwatch sw = new Stopwatch();
             sw.Start();
@@ -112,8 +100,12 @@ namespace F12019New
 
                     
                     Byte[] received = socket.Receive(ref _senderIP);
-                    
-                    if (received.Length == bytesInMotionPacket)
+
+                    if (received.Length == bytesInTelemetryPacket2019 || received.Length == bytesInTelemetryPacket2019-2)
+                    {
+                        var telemData = new PacketCarTelemetryData(received);
+                        lastRPMs = telemData.m_carTelemetryData[0].m_engineRPM;
+                    } else if (received.Length == bytesInMotionPacket2019 || received.Length == bytesInMotionPacket2019-2)
                     {
                         packData = new PacketMotionData(received);
                         
@@ -131,6 +123,7 @@ namespace F12019New
                         {
                             LogDebug("Received packet has expected number of bytes but is not a motion packet. This should not happen.");
                             IsRunning = false;
+                            lastRPMs = 0;
                         }
                     }
                     
@@ -143,6 +136,7 @@ namespace F12019New
                 {
                     IsConnected = false;
                     IsRunning = false;
+                    lastRPMs = 0;
                     LogDebug($"Caught Exception while unmarshalling data '{e.Message}'");
                     Thread.Sleep(1000);
                 }

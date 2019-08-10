@@ -21,7 +21,8 @@ namespace F12019New
             int start_idx = idx;
 
             this.m_packetFormat = BitConverter.ToUInt16(rawData, idx); idx += sizeof(UInt16);
-            if (Globals.is_f1_2019)
+            if (rawData.Length == F12019NewTelemetryProvider.bytesInMotionPacket2019 ||
+                rawData.Length == F12019NewTelemetryProvider.bytesInTelemetryPacket2019)
             {
                 this.m_gameMajorVersion = rawData[idx]; idx += 1;
                 this.m_gameMinorVersion = rawData[idx]; idx += 1;
@@ -151,6 +152,100 @@ namespace F12019New
         }
     }
 
+    class CarTelemetryData
+    {
+        public int sz { get; set; }
+
+        public UInt16 m_speed;                                  // Speed of car in kilometres per hour
+        public float m_throttle;                                // Amount of throttle applied (0.0 to 1.0)
+        public float m_steer;                                   // Steering (-1.0 (full lock left) to 1.0 (full lock right))
+        public float m_brake;                                   // Amount of brake applied (0.0 to 1.0)
+        public byte m_clutch;                                   // Amount of clutch applied (0 to 100)
+        public sbyte m_gear;                                    // Gear selected (1-8, N=0, R=-1)
+        public UInt16 m_engineRPM;                              // Engine RPM
+        public byte m_drs;                                      // 0 = off, 1 = on
+        public byte m_revLightsPercent;                         // Rev lights indicator (percentage)
+        public UInt16[] m_brakesTemperature { get; set; }       // Brakes temperature (celsius)
+        public UInt16[] m_tyresSurfaceTemperature { get; set; } // Tyres surface temperature (celsius)
+        public UInt16[] m_tyresInnerTemperature { get; set; }   // Tyres inner temperature (celsius)
+        public UInt16 m_engineTemperature { get; set; }         // Engine temperature (celsius)
+        public float[] m_tyresPressure { get; set; }            // Tyres pressure (PSI)
+        public byte[] m_surfaceType { get; set; }               // Driving surface, see appendices
+
+        public CarTelemetryData(byte[] rawData, int idx)
+        {
+            int start_idx = idx;
+
+            this.m_speed = BitConverter.ToUInt16(rawData, idx); idx += sizeof(UInt16);
+            this.m_throttle = BitConverter.ToSingle(rawData, idx); idx += sizeof(float);
+            this.m_steer = BitConverter.ToSingle(rawData, idx); idx += sizeof(float);
+            this.m_brake = BitConverter.ToSingle(rawData, idx); idx += sizeof(float);
+            this.m_clutch = rawData[idx]; idx += 1;
+            this.m_gear = (sbyte)rawData[idx]; idx += 1;
+            this.m_engineRPM = BitConverter.ToUInt16(rawData, idx); idx += sizeof(UInt16);
+            this.m_drs = rawData[idx]; idx += 1;
+            this.m_revLightsPercent = rawData[idx]; idx += 1;
+            this.m_brakesTemperature = Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
+            this.m_tyresSurfaceTemperature = Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
+            this.m_tyresInnerTemperature = Conv4Array<UInt16>(rawData, idx); idx += 4 * sizeof(UInt16);
+            this.m_tyresPressure = Conv4Array<float>(rawData, idx); idx += 4 * sizeof(float);
+            this.m_surfaceType = Conv4Array<byte>(rawData, idx); idx += 4 * sizeof(byte);
+            this.m_engineTemperature = BitConverter.ToUInt16(rawData, idx); idx += sizeof(UInt16);
+
+            this.sz = idx - start_idx;
+        }
+
+        public dynamic ConvVal<T>(byte[] rawData, int idx, out int len)
+        {
+            if (typeof(T) == typeof(float))
+            {
+                len = 4;
+                return BitConverter.ToSingle(rawData, idx);
+            }
+            else if (typeof(T) == typeof(UInt16))
+            {
+                len = 2;
+                return BitConverter.ToUInt16(rawData, idx);
+            }
+            else
+            {
+                len = 1;
+                return rawData[idx];
+            }
+        }
+
+        public T[] Conv4Array<T>(byte[] rawData, int idx)
+        {
+            int len = 0;
+
+            T[] a = new T[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                a[i] = ConvVal<T>(rawData, i * len + idx, out len);
+            }
+            return a;
+        }
+    }
+
+    class PacketCarTelemetryData
+    {
+        public PacketHeader m_header;                              // Header
+        public CarTelemetryData[] m_carTelemetryData { get; set; } // Data for all cars on track
+        public UInt32 m_buttonStatus { get; set; }          // Bit flags specifying which buttons are being pressed
+                                                            // currently - see appendices
+        public PacketCarTelemetryData(byte[] rawData)
+        {
+            int idx = 0;
+            this.m_header = new PacketHeader(rawData, idx); idx += this.m_header.sz;
+            this.m_carTelemetryData = new CarTelemetryData[20];
+            for (int i = 0; i < 20; i++)
+            {
+                this.m_carTelemetryData[i] = new CarTelemetryData(rawData, idx); idx += this.m_carTelemetryData[i].sz;
+            }
+        }
+    }
+
     class F12019NewTelemetryData
     {
         public float posX { get; set; }           // World space X position
@@ -187,7 +282,7 @@ namespace F12019New
         public float TractionLoss { get; set; }                          // Derived value. Set in F12019NewTelemetryInfo.cs
         public float BumpRight { get; set; }                             // Derived value. Set in F12019NewTelemetryInfo.cs
         public float BumpLeft { get; set; }                              // Derived value. Set in F12019NewTelemetryInfo.cs
-        
+        public int RPMs { get; set; }                                    // From telemetry data packets stored in lastRPMs
 
         public F12019NewTelemetryData(PacketMotionData data)
         {
@@ -221,6 +316,7 @@ namespace F12019New
             this.angularAccelerationY = data.m_angularAccelerationY;
             this.angularAccelerationZ = data.m_angularAccelerationZ;
             this.frontWheelsAngle = data.m_frontWheelsAngle;
+            this.RPMs = F12019NewTelemetryProvider.lastRPMs;
         }
     }
 }
