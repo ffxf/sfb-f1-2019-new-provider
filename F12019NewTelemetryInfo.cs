@@ -1,4 +1,6 @@
-﻿using SimFeedback.telemetry;
+﻿// Builds the telemetry data exposed in SimFeedback
+
+using SimFeedback.telemetry;
 using System;
 using System.Reflection;
 

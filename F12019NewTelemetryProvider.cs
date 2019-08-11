@@ -1,4 +1,6 @@
-﻿using SimFeedback.log;
+﻿// F1-2018/2019 Telemetry Provider for SimFeedback supporting the "new" UDP format for both games
+
+using SimFeedback.log;
 using SimFeedback.telemetry;
 using System;
 using System.Diagnostics;
