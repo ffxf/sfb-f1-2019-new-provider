@@ -3,6 +3,7 @@
 using SimFeedback.log;
 using SimFeedback.telemetry;
 using System;
+using System.IO;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
@@ -19,7 +20,7 @@ namespace F12019New
 
         private bool isStopped = true;                  // flag to control the polling thread
         private Thread t;                               // the polling thread, reads telemetry data and sends TelemetryUpdated events
-        private const int PORTNUM = 20777;              // Server Port
+        private int PORTNUM = 20777;                    // Server Port; may get reset via file <SFB_root>/provider/f12019new_port
         private IPEndPoint _senderIP;                   // IP address of the sender for the udp connection used by the worker thread
 
 
@@ -38,6 +39,16 @@ namespace F12019New
         {
             base.Init(logger);
             Log("Initializing F12019NewTelemetryProvider");
+
+            var portFile = @"provider\f12019new_port.txt"; // Optional file to define f1 game telemetry port
+            if (File.Exists(portFile))
+            {
+                LogDebug($"F12019New port number file '{portFile}' was found - trying to set port defined in there.");
+                var port = File.ReadAllText(portFile);
+                if (Int32.TryParse(port, out int iport))
+                    PORTNUM = iport;
+            }
+            LogDebug($"F1-2018 or 2019 telemetry port number is {PORTNUM}");
         }
 
         public override string[] GetValueList()
@@ -114,6 +125,7 @@ namespace F12019New
                             lastRPMs = telemData.m_carTelemetryData2019[0].m_engineRPM;
                         else
                             lastRPMs = telemData.m_carTelemetryData2018[0].m_engineRPM;
+                        LogDebug($"Got RPMs: '{lastRPMs}'");
                     }
                     else if (received.Length == bytesInMotionPacket2019 || received.Length == bytesInMotionPacket2019-2)
                     {
@@ -122,7 +134,9 @@ namespace F12019New
                         if (packData.m_header.m_packetId == 0) // should always be the case if the # of bytes received match
                         {
                             data = new F12019NewTelemetryData(packData);
-                            
+
+                            LogDebug($"Got longitudal g force: '{data.gForceLongitudinal}'");
+
                             IsRunning = true;
 
                             TelemetryEventArgs args = new TelemetryEventArgs(
